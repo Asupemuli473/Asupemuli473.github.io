@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>note4u</title>
+    <script type="text/javascript">
+      function add(type){
+	  var elem;
+	  switch(type){
+	  case 'text':
+	      elem = "<p><textarea placeholder='Enter your text here...'></textarea></p>";
+	      break;
+	  case 'voice':
+	      elem = "<p><input type='file' accept='audio/*;capture=microphone'></p>";
+	      break;
+	  case 'picture':
+	      elem = "<p><input type='file' accept='image/*;capture=camera'></p>"
+	      break;
+	  }
+	  var div = document.getElementById("notes");
+	  div.innerHTML += elem;
+      }
+    </script>
+</head>
+<body>
+  <header>
+    <h1>Note4u</h1>
+  </header>
+  <section>
+    <article><p>This website lets you create notes. There are different kinds of note:
+    <ul>
+      <li><b>Canvas note</b>: allows you to freely draw something</li>
+      <li><b>Voice note</b>: allows you to record an audio file</li>
+      <li><b>Video note</b>: allows you to record a video</li>
+      <li><b>text note</b>: allows you to create a textual note</li>
+    </ul>
+    You can add them via click on the buttons below, just try it. After you're done, you can download them.</p>
+      <div id="notes">
+      </div>
+    </article>
+    <footer>
+    <button type="button">Canvas note</button>
+    <button type="button" onclick="add('voice')">Voice note</button>
+    <button type="button">Video note</button>
+    <button type="button" onclick="add('text')">Text note</button>
+    <button type="picture" onclick="add('picture')">Picture node</button>
+    </footer>
+  </section>
+</body>
+
+</html>
