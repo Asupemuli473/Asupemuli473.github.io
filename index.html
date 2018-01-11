@@ -43,8 +43,8 @@
 	      elem.addEventListener("mousedown", start_path, false);
 	      elem.addEventListener("mousemove", draw_to_new_point, false);
 	      elem.addEventListener("mouseup", end_path, false);
-	      elem.addEventListener("touchstart", start_path_touch, false);
-	      elem.addEventListener("touchmove", draw_to_new_point_touch, false);
+	      elem.addEventListener("touchstart", start_path, false);
+	      elem.addEventListener("touchmove", draw_to_new_point, false);
 	      elem.addEventListener("touchend", end_path, false);
 	      break;
 	  }
@@ -88,7 +88,9 @@
       }
 
       function start_path(event){
-	  console.log(event.target);
+	  if(event.type=='touchdown'){
+	      event.preventDefault();
+	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
 	  cur_drawing_ctx.beginPath();
 	  cur_drawing_ctx.lineWidth = 5;
@@ -97,6 +99,9 @@
       }
 
       function draw_to_new_point(event){
+	  if(event.type=='touchdown'){
+	      event.preventDefault();
+	  }
 	  if(cur_drawing_ctx!=-1){
 	      cur_drawing_ctx.lineTo(event.clientX-event.target.offsetLeft, event.clientY-event.target.offsetTop);
 	      cur_drawing_ctx.stroke();
@@ -106,16 +111,6 @@
       function end_path(){
 	  cur_drawing_ctx.stroke();
 	  cur_drawing_ctx = -1;
-      }
-
-      function start_path_touch(event){
-	  event.preventDefault();
-	  start_path(event);
-      }
-
-      function draw_to_new_point_touch(event){
-	  event.preventDefault();
-	  draw_to_new_point(event);
       }
 
     </script>
