@@ -88,7 +88,7 @@
       }
 
       function start_path(event){
-	  if(event.type=='touchdown'){
+	  if(event.type=='touchstart'){
 	      event.preventDefault();
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
