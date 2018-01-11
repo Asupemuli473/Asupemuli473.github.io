@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>note4u</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript">
       var num_text = 0;
       var num_picture = 0;
@@ -40,12 +41,18 @@
 	  case 'canvas':
 	      elem = document.createElement("canvas");
 	      elem.setAttribute("id", "canvas_".concat(num_canvas++));
-	      elem.addEventListener("mousedown", start_path, false);
-	      elem.addEventListener("mousemove", draw_to_new_point, false);
-	      elem.addEventListener("mouseup", end_path, false);
-	      elem.addEventListener("touchstart", start_path, false);
-	      elem.addEventListener("touchmove", draw_to_new_point, false);
-	      elem.addEventListener("touchend", end_path, false);
+	      var w = document.body.clientWidth*0.9;
+	      var h = document.body.clientHeight*0.3;
+	      console.log(w);
+	      console.log(document);
+	      elem.setAttribute("width", w);
+	      elem.setAttribute("height", h);
+	      elem.addEventListener("mousedown", start_path, true);
+	      elem.addEventListener("mousemove", draw_to_new_point, true);
+	      elem.addEventListener("mouseup", end_path, true);
+	      elem.addEventListener("touchstart", start_path, true);
+	      elem.addEventListener("touchmove", draw_to_new_point, true);
+	      elem.addEventListener("touchend", end_path, true);
 	      break;
 	  }
  	  
@@ -94,7 +101,7 @@
 	  cur_drawing_ctx = event.target.getContext("2d");
 	  document.getElementById("debug").innerHTML = cur_drawing_ctx;
 	  cur_drawing_ctx.beginPath();
-	  cur_drawing_ctx.lineWidth = 15;
+	  cur_drawing_ctx.lineWidth = 3;
 	  cur_drawing_ctx.strokeStyle = "#000000";
 	  cur_drawing_ctx.moveTo(event.clientX-event.target.offsetLeft, event.clientY-event.target.offsetTop);
       }
@@ -109,14 +116,14 @@
 	  }
       }
 
-      function end_path(){
+      function end_path(event){
 	  cur_drawing_ctx.stroke();
 	  cur_drawing_ctx = -1;
       }
 
     </script>
 </head>
-<body onmousemove=>
+<body>
   <header>
     <h1>Note4u</h1>
   </header>
