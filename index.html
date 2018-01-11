@@ -23,9 +23,7 @@
 	      elem.setAttribute("type", "file");
 	      elem.setAttribute("accept", "image/*");
 	      elem.setAttribute("capture", "camera");
-	      var i = elem.getAttribute("id");
 	      elem.setAttribute("onchange", "change_image(this)");
-	      console.log(elem.getAttribute("onchange"));
 	      break;
 	  case 'video':
 	      elem = document.createElement("input"); 
@@ -34,6 +32,7 @@
 	      elem.setAttribute("type", "file");
 	      elem.setAttribute("accept", "video/*");
 	      elem.setAttribute("capture", "camera");
+	      elem.setAttribute("onchange", "change_video(this)");
 	      break
 	  case 'canvas':
 	      elem = document.createElement("canvas"); 
@@ -50,18 +49,27 @@
       }
 
       function change_image(e){
-	  console.log(e)
 	  var pic_url = URL.createObjectURL(e.files[0]);
 	  var id_of_img_tag = e.id.concat("_img");
 	  var elem = document.getElementById(id_of_img_tag);
-	  console.log(elem);
 	  if(!elem){
 	      elem = document.createElement("img");
-	      elem.setAttribute("src", pic_url);
 	      elem.setAttribute("alt", "image");
 	      insertAfter(elem, e);
 	  }
 	  elem.setAttribute("src", pic_url);
+      }
+
+      function change_video(e){
+	  var vid_url = URL.createObjectURL(e.files[0]);
+	  var id_of_vid_tag = e.id.concat("_vid");
+	  var elem = document.getElementById(id_of_vid_tag);
+	  if(!elem){
+	      elem = document.createElement("video");
+	      elem.setAttribute("controls","");
+	      insertAfter(elem, e);
+	  }
+	  elem.setAttribute("src", vid_url);
       }
 
       function insertAfter(el, referenceNode){
