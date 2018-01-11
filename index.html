@@ -9,22 +9,53 @@
       
       function add(type){
 	  var elem;
+	  var id = document.createAttribute("id");
+	  
 	  switch(type){
 	  case 'text':
-	      elem = "<p><textarea id='text_".concat(num_text++,"' placeholder='Enter your text here...'></textarea></p>");
+	      elem = document.createElement("textarea"); 
+	      id.value = num_text++;
+	      
+	      var placeholder = document.createAttribute("placeholder");
+	      placeholder.value = "Enter text here...";
+	      	      
+	      elem.setAttributeNode(placeholder);
 	      break;
 	  case 'picture':
-	      elem = "<p><input id='picture_".concat(num_picture++, "'type='file' accept='image/*;capture=camera'></p>");
+	      elem = document.createElement("input"); 
+	      id.value = num_picture++;
+
+	      var type = document.createAttribute("type");
+	      type.value = "file";
+
+	      var accept = document.createAttribute("accept");
+	      accept.value = "image/*";
+
+	      var capture = document.createAttribute("capture");
+	      capture.value = "camera";
+	      
+	      elem.setAttributeNode(type);
+	      elem.setAttributeNode(accept);
+	      elem.setAttributeNode(capture);
 	      break;
 	  case 'video':
-	      elem = "<p><video controls id='video_".concat(num_video++,"'style='border-style:solid;border-width:10px'></video></p>");
+	      elem = document.createElement("video"); 
+	      id.value = num_video++;
 	      break
 	  case 'canvas':
-	      elem = "<p><canvas id='canvas_".concat(num_canvas++,"'style='border-style:solid;border-width:10px'></canvas></p>");
+	      elem = document.createElement("canvas"); 
+	      id.value = num_canvas++;
 	      break;
 	  }
+
+	  elem.setAttributeNode(id);	     
+	  
+	  var p = document.createElement("p");
+	  p.appendChild(elem);
+	  
+
 	  var div = document.getElementById("notes");
-	  div.innerHTML += elem;
+	  div.appendChild(p);
       }
     </script>
 </head>
