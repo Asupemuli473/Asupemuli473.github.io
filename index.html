@@ -92,6 +92,7 @@
 	      event.preventDefault();
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
+	  document.getElementById("debug").innerHTML = cur_drawing_ctx;
 	  cur_drawing_ctx.beginPath();
 	  cur_drawing_ctx.lineWidth = 15;
 	  cur_drawing_ctx.strokeStyle = "#000000";
@@ -128,6 +129,7 @@
       <li><b>Text note</b>: allows you to create a textual note</li>
     </ul>
     You can add them via click on the buttons below, just try it. After you're done, you can download them.</p>
+      <p id="debug">Text</p>
       <div id="notes">
       </div>
     </article>
