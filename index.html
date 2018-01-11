@@ -6,7 +6,10 @@
       var num_picture = 0;
       var num_video = 0;
       var num_canvas = 0;
-      
+
+
+      var cur_drawing_ctx = -1;
+
       function add(type){
 	  var elem;
 	  var id;
@@ -35,8 +38,11 @@
 	      elem.setAttribute("onchange", "change_video(this)");
 	      break
 	  case 'canvas':
-	      elem = document.createElement("canvas"); 
+	      elem = document.createElement("canvas");
 	      elem.setAttribute("id", "canvas_".concat(num_canvas++));
+	      elem.addEventListener("mousedown", start_path, true);
+	      elem.addEventListener("mousemove", draw_to_new_point, true);
+	      elem.addEventListener("mouseup", end_path, true);
 	      break;
 	  }
 	  
@@ -54,6 +60,7 @@
 	  var elem = document.getElementById(id_of_img_tag);
 	  if(!elem){
 	      elem = document.createElement("img");
+	      elem.setAttribute("id", id_of_img_tag);
 	      elem.setAttribute("alt", "image");
 	      insertAfter(elem, e);
 	  }
@@ -66,6 +73,7 @@
 	  var elem = document.getElementById(id_of_vid_tag);
 	  if(!elem){
 	      elem = document.createElement("video");
+	      elem.setAttribute("id", id_of_vid_tag);
 	      elem.setAttribute("controls","");
 	      insertAfter(elem, e);
 	  }
@@ -75,11 +83,31 @@
       function insertAfter(el, referenceNode){
 	  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
       }
-      
+
+      function start_path(event){
+	  console.log(event.target);
+	  cur_drawing_ctx = event.target.getContext("2d");
+	  cur_drawing_ctx.beginPath();
+	  cur_drawing_ctx.lineWidth = 5;
+	  cur_drawing_ctx.strokeStyle = "#000000";
+	  cur_drawing_ctx.moveTo(event.clientX-event.target.offsetLeft, event.clientY-event.target.offsetTop);
+      }
+
+      function draw_to_new_point(event){
+	  if(cur_drawing_ctx!=-1){
+	      cur_drawing_ctx.lineTo(event.clientX-event.target.offsetLeft, event.clientY-event.target.offsetTop);
+	      cur_drawing_ctx.stroke();
+	  }
+      }
+
+      function end_path(){
+	  cur_drawing_ctx.stroke();
+	  cur_drawing_ctx = -1;
+      }
 
     </script>
 </head>
-<body>
+<body onmousemove=>
   <header>
     <h1>Note4u</h1>
   </header>
