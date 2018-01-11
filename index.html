@@ -9,59 +9,37 @@
       
       function add(type){
 	  var elem;
-	  var id = document.createAttribute("id");
+	  var id;
 	  
 	  switch(type){
 	  case 'text':
 	      elem = document.createElement("textarea"); 
-	      id.value = num_text++;
-	      
-	      var placeholder = document.createAttribute("placeholder");
-	      placeholder.value = "Enter text here...";
-	      	      
-	      elem.setAttributeNode(placeholder);
+	      elem.setAttribute("placeholder","Enter text here");
+	      elem.setAttribute("id", "text_".concat(num_text++));
 	      break;
 	  case 'picture':
-	      elem = document.createElement("input"); 
-	      id.value = num_picture++;
-
-	      var type = document.createAttribute("type");
-	      type.value = "file";
-
-	      var accept = document.createAttribute("accept");
-	      accept.value = "image/*";
-
-	      var capture = document.createAttribute("capture");
-	      capture.value = "camera";
-	      
-	      elem.setAttributeNode(type);
-	      elem.setAttributeNode(accept);
-	      elem.setAttributeNode(capture);
+	      elem = document.createElement("input");
+	      elem.setAttribute("id", "picture_".concat(num_picture++));
+	      elem.setAttribute("type", "file");
+	      elem.setAttribute("accept", "image/*");
+	      elem.setAttribute("capture", "camera");
+	      var i = elem.getAttribute("id");
+	      elem.setAttribute("onchange", "change_image(this)");
+	      console.log(elem.getAttribute("onchange"));
 	      break;
 	  case 'video':
 	      elem = document.createElement("input"); 
-	      id.value = num_video++;
-
-	      var type = document.createAttribute("type");
-	      type.value = "file";
-
-	      var accept = document.createAttribute("accept");
-	      accept.value = "video/*";
-
-	      var capture = document.createAttribute("capture");
-	      capture.value = "camera";
-	      
-	      elem.setAttributeNode(type);
-	      elem.setAttributeNode(accept);
-	      elem.setAttributeNode(capture);
+	      elem.setAttribute(id, "video_".concat(num_video++));
+	      // elem.setAttribute("onchange", "fct");  TODO
+	      elem.setAttribute("type", "file");
+	      elem.setAttribute("accept", "video/*");
+	      elem.setAttribute("capture", "camera");
 	      break
 	  case 'canvas':
 	      elem = document.createElement("canvas"); 
-	      id.value = num_canvas++;
+	      elem.setAttribute("id", "canvas_".concat(num_canvas++));
 	      break;
 	  }
-
-	  elem.setAttributeNode(id);	     
 	  
 	  var p = document.createElement("p");
 	  p.appendChild(elem);
@@ -70,6 +48,27 @@
 	  var div = document.getElementById("notes");
 	  div.appendChild(p);
       }
+
+      function change_image(e){
+	  console.log(e)
+	  var pic_url = URL.createObjectURL(e.files[0]);
+	  var id_of_img_tag = e.id.concat("_img");
+	  var elem = document.getElementById(id_of_img_tag);
+	  console.log(elem);
+	  if(!elem){
+	      elem = document.createElement("img");
+	      elem.setAttribute("src", pic_url);
+	      elem.setAttribute("alt", "image");
+	      insertAfter(elem, e);
+	  }
+	  elem.setAttribute("src", pic_url);
+      }
+
+      function insertAfter(el, referenceNode){
+	  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+      }
+      
+
     </script>
 </head>
 <body>
