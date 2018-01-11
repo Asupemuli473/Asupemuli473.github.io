@@ -40,9 +40,12 @@
 	  case 'canvas':
 	      elem = document.createElement("canvas");
 	      elem.setAttribute("id", "canvas_".concat(num_canvas++));
-	      elem.addEventListener("mousedown", start_path, true);
-	      elem.addEventListener("mousemove", draw_to_new_point, true);
-	      elem.addEventListener("mouseup", end_path, true);
+	      elem.addEventListener("mousedown", start_path, false);
+	      elem.addEventListener("mousemove", draw_to_new_point, false);
+	      elem.addEventListener("mouseup", end_path, false);
+	      elem.addEventListener("touchstart", start_path_touch, false);
+	      elem.addEventListener("touchmove", draw_to_new_point_touch, false);
+	      elem.addEventListener("touchend", end_path, false);
 	      break;
 	  }
 	  
@@ -103,6 +106,16 @@
       function end_path(){
 	  cur_drawing_ctx.stroke();
 	  cur_drawing_ctx = -1;
+      }
+
+      function start_path_touch(event){
+	  event.preventDefault();
+	  start_path(event);
+      }
+
+      function draw_to_new_point_touch(event){
+	  event.preventDefault();
+	  draw_to_new_point(event);
       }
 
     </script>
