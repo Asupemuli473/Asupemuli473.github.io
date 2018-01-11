@@ -39,8 +39,21 @@
 	      elem.setAttributeNode(capture);
 	      break;
 	  case 'video':
-	      elem = document.createElement("video"); 
+	      elem = document.createElement("input"); 
 	      id.value = num_video++;
+
+	      var type = document.createAttribute("type");
+	      type.value = "file";
+
+	      var accept = document.createAttribute("accept");
+	      accept.value = "video/*";
+
+	      var capture = document.createAttribute("capture");
+	      capture.value = "camera";
+	      
+	      elem.setAttributeNode(type);
+	      elem.setAttributeNode(accept);
+	      elem.setAttributeNode(capture);
 	      break
 	  case 'canvas':
 	      elem = document.createElement("canvas"); 
