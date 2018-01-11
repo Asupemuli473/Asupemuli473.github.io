@@ -2,17 +2,25 @@
   <head>
     <title>note4u</title>
     <script type="text/javascript">
+      var num_text = 0;
+      var num_picture = 0;
+      var num_video = 0;
+      var num_canvas = 0;
+      
       function add(type){
 	  var elem;
 	  switch(type){
 	  case 'text':
-	      elem = "<p><textarea placeholder='Enter your text here...'></textarea></p>";
-	      break;
-	  case 'voice':
-	      elem = "<p><input type='file' accept='audio/*;capture=microphone'></p>";
+	      elem = "<p><textarea id='text_".concat(num_text++,"' placeholder='Enter your text here...'></textarea></p>");
 	      break;
 	  case 'picture':
-	      elem = "<p><input type='file' accept='image/*;capture=camera'></p>"
+	      elem = "<p><input id='picture_".concat(num_picture++, "'type='file' accept='image/*;capture=camera'></p>");
+	      break;
+	  case 'video':
+	      elem = "<p><video controls id='video_".concat(num_video++,"'style='border-style:solid;border-width:10px'></video></p>");
+	      break
+	  case 'canvas':
+	      elem = "<p><canvas id='canvas_".concat(num_canvas++,"'style='border-style:solid;border-width:10px'></canvas></p>");
 	      break;
 	  }
 	  var div = document.getElementById("notes");
@@ -28,22 +36,24 @@
     <article><p>This website lets you create notes. There are different kinds of note:
     <ul>
       <li><b>Canvas note</b>: allows you to freely draw something</li>
-      <li><b>Voice note</b>: allows you to record an audio file</li>
+      <li><b>Picture note</b>: allows you to take a picture</li>
       <li><b>Video note</b>: allows you to record a video</li>
-      <li><b>text note</b>: allows you to create a textual note</li>
+      <li><b>Text note</b>: allows you to create a textual note</li>
     </ul>
     You can add them via click on the buttons below, just try it. After you're done, you can download them.</p>
       <div id="notes">
       </div>
     </article>
     <footer>
-    <button type="button">Canvas note</button>
-    <button type="button" onclick="add('voice')">Voice note</button>
-    <button type="button">Video note</button>
-    <button type="button" onclick="add('text')">Text note</button>
-    <button type="picture" onclick="add('picture')">Picture node</button>
+      <button type="button" onclick="add('canvas')">Canvas note </button>
+      <button type="button" onclick="add('picture')">Picture node</button>
+      <button type="button" onclick="add('video')">Video note</button>
+      <button type="button" onclick="add('text')">Text note</button>
     </footer>
   </section>
+  <footer>
+    <button type="button" onclick="download_data()">Download note</button>
+  </footer>
 </body>
 
 </html>
