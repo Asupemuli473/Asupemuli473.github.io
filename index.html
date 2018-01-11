@@ -98,11 +98,12 @@
 	      event.preventDefault();
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
-	  document.getElementById("debug").innerHTML = "clicked at: ".concat(event.layerX-event.target.offsetLeft,", ",event.layerY-event.target.offsetTop);
+	  console.log(event);
+	  document.getElementById("debug").innerHTML = "clicked at: ".concat(event.layerX,", ",event.layerY);
 	  cur_drawing_ctx.beginPath();
 	  cur_drawing_ctx.lineWidth = 3;
 	  cur_drawing_ctx.strokeStyle = "#000000";
-	  cur_drawing_ctx.moveTo(event.clientX-event.target.offsetLeft, event.clientY-event.target.offsetTop);
+	  cur_drawing_ctx.moveTo(event.layerX-event.target.offsetLeft, event.layerY-event.target.offsetTop);
       }
 
       function draw_to_new_point(event){
@@ -110,7 +111,7 @@
 	      event.preventDefault();
 	  }
 	  if(cur_drawing_ctx!=-1){
-	      cur_drawing_ctx.lineTo(event.clientX-event.target.offsetLeft, event.clientY-event.target.offsetTop);
+	      cur_drawing_ctx.lineTo(event.layerX-event.target.offsetLeft, event.layerY-event.target.offsetTop);
 	      cur_drawing_ctx.stroke();
 	  }
       }
