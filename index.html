@@ -43,16 +43,15 @@
 	      elem.setAttribute("id", "canvas_".concat(num_canvas++));
 	      var w = document.body.clientWidth*0.9;
 	      var h = document.body.clientHeight*0.3;
-	      console.log(w);
-	      console.log(document);
 	      elem.setAttribute("width", w);
 	      elem.setAttribute("height", h);
-	      elem.addEventListener("mousedown", start_path, true);
-	      elem.addEventListener("mousemove", draw_to_new_point, true);
-	      elem.addEventListener("mouseup", end_path, true);
-	      elem.addEventListener("touchstart", start_path, true);
-	      elem.addEventListener("touchmove", draw_to_new_point, true);
-	      elem.addEventListener("touchend", end_path, true);
+	      elem.addEventListener("mousedown", start_path);
+	      elem.addEventListener("mousemove", draw_to_new_point);
+	      elem.addEventListener("mouseup", end_path);
+	      
+	      elem.addEventListener("touchstart", start_path);
+	      elem.addEventListener("touchmove", draw_to_new_point);
+	      elem.addEventListener("touchend", end_path);
 	      break;
 	  }
  	  
@@ -99,7 +98,7 @@
 	      event.preventDefault();
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
-	  document.getElementById("debug").innerHTML = cur_drawing_ctx;
+	  document.getElementById("debug").innerHTML = "clicked at: ".concat(event.clientX-event.target.offsetLeft,", ",event.clientY-event.target.offsetTop);
 	  cur_drawing_ctx.beginPath();
 	  cur_drawing_ctx.lineWidth = 3;
 	  cur_drawing_ctx.strokeStyle = "#000000";
