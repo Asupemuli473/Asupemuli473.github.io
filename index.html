@@ -48,7 +48,7 @@
 	      elem.addEventListener("touchend", end_path, false);
 	      break;
 	  }
-	  
+ 	  
 	  var p = document.createElement("p");
 	  p.appendChild(elem);
 	  
@@ -89,6 +89,7 @@
 
       function start_path(event){
 	  if(event.type=='touchstart'){
+	      alert("triggered");
 	      event.preventDefault();
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
@@ -100,6 +101,7 @@
 
       function draw_to_new_point(event){
 	  if(event.type=='touchdown'){
+	      alert("triggered");
 	      event.preventDefault();
 	  }
 	  if(cur_drawing_ctx!=-1){
