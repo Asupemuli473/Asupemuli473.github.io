@@ -98,9 +98,13 @@
 	      event.preventDefault();
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
-	  console.log(event);
-	  document.getElementById("debug").innerHTML = "clicked at: ".concat(event.layerX,", ",event.layerY);
-	  document.getElementById("debug").innerHTML = event.target.offsetLeft;
+	  document.getElementById("debug").innerHTML = "Client:</br>"
+	  document.getElementById("debug").innerHTML += "clicked at (without subtracting): ".concat(event.clientX,", ",event.clientY);
+	  	  document.getElementById("debug").innerHTML += "</br>clicked at (with subtracting): ".concat(event.clientX-event.target.offsetLeft,", ",event.clientY-event.target.offsetTop);
+	  document.getElementById("debug").innerHTML += "</br>Layer:</br>"
+	  document.getElementById("debug").innerHTML += "clicked at (without subtracting): ".concat(event.layerX,", ",event.layerY);
+	  	  document.getElementById("debug").innerHTML += "</br>clicked at (with subtracting): ".concat(event.layerX-event.target.offsetLeft,", ",event.layerY-event.target.offsetTop);
+	  document.getElementById("debug").innerHTML += "</br>offsetleft: ".concat(event.target.offsetLeft, ", top: ", event.target.offsetTop);
 	  cur_drawing_ctx.beginPath();
 	  cur_drawing_ctx.lineWidth = 3;
 	  cur_drawing_ctx.strokeStyle = "#000000";
