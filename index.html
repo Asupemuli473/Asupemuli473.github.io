@@ -8,9 +8,13 @@
       var num_video = 0;
       var num_canvas = 0;
 
+      var current_canvas = 0;
 
-      var cur_drawing_ctx = -1;
-
+      function init(){
+	  document.getElementById("editor").style.display = "none";
+	  document.getElementById("editor_buttons").style.display = "none";
+      }
+      
       function add(type){
 	  var elem;
 	  var id;
@@ -32,33 +36,28 @@
 	  case 'video':
 	      elem = document.createElement("input"); 
 	      elem.setAttribute(id, "video_".concat(num_video++));
-	      // elem.setAttribute("onchange", "fct");  TODO
 	      elem.setAttribute("type", "file");
 	      elem.setAttribute("accept", "video/*");
 	      elem.setAttribute("capture", "camera");
 	      elem.setAttribute("onchange", "change_video(this)");
 	      break
 	  case 'canvas':
-	      elem = document.createElement("canvas");
-	      elem.setAttribute("id", "canvas_".concat(num_canvas++));
-	      var w = document.body.clientWidth*0.9;
-	      var h = document.body.clientHeight*0.3;
-	      elem.setAttribute("width", w);
-	      elem.setAttribute("height", h);
-	      elem.addEventListener("mousedown", start_path);
-	      elem.addEventListener("mousemove", draw_to_new_point);
-	      elem.addEventListener("mouseup", end_path);
+	      elem = document.createElement("img");
+	      current_canvas = num_canvas;
+	      elem.setAttribute("id", "canvas_"+(num_canvas++));
 	      
-	      elem.addEventListener("touchstart", start_path);
-	      elem.addEventListener("touchmove", draw_to_new_point);
-	      elem.addEventListener("touchend", end_path);
+	      elem.addEventListener("dblclick", open_canvas);
+	      document.getElementById("content").style.display = "none";
+	      document.getElementById("content_buttons").style.display = "none";
+
+	      document.getElementById("editor").style.display = "inline";
+	      document.getElementById("editor_buttons").style.display = "inline";
 	      break;
 	  }
  	  
 	  var p = document.createElement("p");
 	  p.appendChild(elem);
 	  
-
 	  var div = document.getElementById("notes");
 	  div.appendChild(p);
       }
@@ -93,23 +92,55 @@
 	  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
       }
 
+     
+
+      function open_canvas(event){
+	  var i = event.target;
+	  var num = i.id.split("_")[1];
+	  
+	  document.getElementById("content").style.display = "none";
+	  document.getElementById("content_buttons").style.display = "none";
+	  
+	  document.getElementById("editor").style.display = "inline";
+	  document.getElementById("editor_buttons").style.display = "inline";
+
+	  current_canvas = num;
+	  var image = new Image;
+	  image.src = i.src;
+	  document.getElementById("ed_canvas").getContext('2d').drawImage(image,0,0);
+	  
+	  
+      }
+
+      function close_canvas(){
+	  var c = document.getElementById("ed_canvas");
+	  var dataURL = c.toDataURL();
+	  document.getElementById("canvas_"+current_canvas).setAttribute("src",dataURL);
+
+	  document.getElementById("content").style.display = "inline";
+	  document.getElementById("content_buttons").style.display = "inline";
+	  
+	  document.getElementById("editor").style.display = "none";
+	  document.getElementById("editor_buttons").style.display = "none";
+
+	  c.getContext('2d').clearRect(0, 0, c.width, c.height);
+      }
+
+      function download_data(event){
+
+      }
+
+      var cur_drawing_ctx = -1;
+
       function start_path(event){
 	  if(event.type=='touchstart'){
 	      event.preventDefault();
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
-	  // document.getElementById("debug").innerHTML = "Client:</br>"
-	  // document.getElementById("debug").innerHTML += "clicked at (without subtracting): ".concat(event.clientX,", ",event.clientY);
-	  // 	  document.getElementById("debug").innerHTML += "</br>clicked at (with subtracting): ".concat(event.clientX-event.target.offsetLeft,", ",event.clientY-event.target.offsetTop);
-	  // document.getElementById("debug").innerHTML += "</br>Layer:</br>"
-	  // document.getElementById("debug").innerHTML += "clicked at (without subtracting): ".concat(event.layerX,", ",event.layerY);
-	  // 	  document.getElementById("debug").innerHTML += "</br>clicked at (with subtracting): ".concat(event.layerX-event.target.offsetLeft,", ",event.layerY-event.target.offsetTop);
-	  // document.getElementById("debug").innerHTML += "</br>offsetleft: ".concat(event.target.offsetLeft, ", top: ", event.target.offsetTop);
 	  cur_drawing_ctx.beginPath();
 	  cur_drawing_ctx.lineWidth = 3;
-	  cur_drawing_ctx.strokeStyle = "#000000";
 	  if(event.type=='touchstart'){
-	         cur_drawing_ctx.moveTo(event.layerX, event.layerY);
+	      cur_drawing_ctx.moveTo(event.layerX, event.layerY);
 	  }
 	  else{
 	      cur_drawing_ctx.moveTo(event.layerX-event.target.offsetLeft, event.layerY-event.target.offsetTop);
@@ -130,37 +161,71 @@
 	      cur_drawing_ctx.stroke();
 	  }
       }
-
+      
       function end_path(event){
 	  cur_drawing_ctx.stroke();
 	  cur_drawing_ctx = -1;
       }
 
+      function select_color(){
+	  var ctx = document.getElementById("ed_canvas").getContext('2d');
+	  var color = document.getElementById("color_picker").value;
+	  ctx.strokeStyle = color;
+	  console.log(ctx);
+      }
+
     </script>
 </head>
-<body>
+<body onload="init()">
   <header>
     <h1>Note4u</h1>
   </header>
   <section>
-    <article><p>This website lets you create notes. There are different kinds of note:
-    <ul>
-      <li><b>Canvas note</b>: allows you to freely draw something</li>
-      <li><b>Picture note</b>: allows you to take a picture</li>
-      <li><b>Video note</b>: allows you to record a video</li>
-      <li><b>Text note</b>: allows you to create a textual note</li>
-    </ul>
-    You can add them via click on the buttons below, just try it. After you're done, you can download them.</p>
-      <p id="debug">Text</p>
-      <div id="notes">
+    <article>
+      <div id="content">
+	<p>This website lets you create notes. There are different kinds of note:
+	  <ul>
+	    <li><b>Canvas note</b>: allows you to freely draw something</li>
+	    <li><b>Picture note</b>: allows you to take a picture</li>
+	    <li><b>Video note</b>: allows you to record a video</li>
+	    <li><b>Text note</b>: allows you to create a textual note</li>
+	  </ul>
+	  You can add them via click on the buttons below, just try it. After you're done, you can download them.</p>
+	<p id="debug">Debug</p>
+	<div id="notes">
+	</div>
       </div>
-    </article>
-    <footer>
-      <button type="button" onclick="add('canvas')">Canvas note </button>
-      <button type="button" onclick="add('picture')">Picture node</button>
-      <button type="button" onclick="add('video')">Video note</button>
-      <button type="button" onclick="add('text')">Text note</button>
+      <div id="editor">
+	<canvas id="ed_canvas"></canvas>
+	<script>
+	  var c = document.getElementById("ed_canvas");
+	  c.width = window.innerWidth;
+	  c.height = window.innerHeight;
+
+	  c.addEventListener("mousedown", start_path);
+	  c.addEventListener("mousemove", draw_to_new_point);
+	  c.addEventListener("mouseup", end_path);
+	  
+	  c.addEventListener("touchstart", start_path);
+	  c.addEventListener("touchmove", draw_to_new_point);
+	  c.addEventListener("touchend", end_path);
+	</script>
+      </div>
+      <footer>
+	<div id="content_buttons">
+	  <button type="button" onclick="add('canvas')">Canvas note </button>
+	  <button type="button" onclick="add('picture')">Picture node</button>
+	  <button type="button" onclick="add('video')">Video note</button>
+	  <button type="button" onclick="add('text')">Text note</button>
+	</div>
+	<div id="editor_buttons">
+	  <input type="color" id="color_picker" onchange="select_color()">
+	  <button id="linewidth_btn" type="button">Linewidth</button>
+	  <button id="eraser_btn" type="button">Eraser</button>
+	  <button onclick="close_canvas()" type="button">Save & back</button>
+	</div>
     </footer>
+    </article>
   </section>
   <footer>
     <button type="button" onclick="download_data()">Download note</button>
