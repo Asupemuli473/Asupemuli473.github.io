@@ -10,6 +10,8 @@
 
       var current_canvas = 0;
 
+      var time_since_last_touch = -1;
+
       function init(){
 	  document.getElementById("editor").style.display = "none";
 	  document.getElementById("editor_buttons").style.display = "none";
@@ -47,6 +49,7 @@
 	      elem.setAttribute("id", "canvas_"+(num_canvas++));
 	      
 	      elem.addEventListener("dblclick", open_canvas);
+	      elem.addEventListener("touchdown", test_double_click);
 	      document.getElementById("content").style.display = "none";
 	      document.getElementById("content_buttons").style.display = "none";
 
@@ -93,6 +96,17 @@
       }
 
      
+      function test_double_click(event){
+	  var d = new Date;
+	  var millis = d.getTime();
+	  if(millis-time_since_last_touch<500){
+	      open_canvas(event);
+	  }
+	  else{
+	      time_since_last_touch = millis;
+	  }
+      }
+      
 
       function open_canvas(event){
 	  var i = event.target;
@@ -138,7 +152,6 @@
 	  }
 	  cur_drawing_ctx = event.target.getContext("2d");
 	  cur_drawing_ctx.beginPath();
-	  cur_drawing_ctx.lineWidth = 3;
 	  if(event.type=='touchstart'){
 	      cur_drawing_ctx.moveTo(event.layerX, event.layerY);
 	  }
@@ -171,7 +184,12 @@
 	  var ctx = document.getElementById("ed_canvas").getContext('2d');
 	  var color = document.getElementById("color_picker").value;
 	  ctx.strokeStyle = color;
-	  console.log(ctx);
+      }
+
+      function select_linewidth(){
+	  var ctx = document.getElementById("ed_canvas").getContext('2d');
+	  var lw = document.getElementById("linewidth_slider").value;
+	  ctx.lineWidth = lw;
       }
 
     </script>
@@ -209,6 +227,8 @@
 	  c.addEventListener("touchstart", start_path);
 	  c.addEventListener("touchmove", draw_to_new_point);
 	  c.addEventListener("touchend", end_path);
+
+	  c.getContext('2d').lineWidth = 5;
 	</script>
       </div>
       <footer>
@@ -219,8 +239,10 @@
 	  <button type="button" onclick="add('text')">Text note</button>
 	</div>
 	<div id="editor_buttons">
+	  <label>Color:</label>
 	  <input type="color" id="color_picker" onchange="select_color()">
-	  <button id="linewidth_btn" type="button">Linewidth</button>
+	  <label>Linewidth:</label>
+	  <input type="range" min="1" max="30" value="5" id="linewidth_slider" onchange="select_linewidth()">
 	  <button id="eraser_btn" type="button">Eraser</button>
 	  <button onclick="close_canvas()" type="button">Save & back</button>
 	</div>
