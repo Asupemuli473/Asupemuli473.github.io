@@ -24,8 +24,8 @@ button.create{
     border-style:solid;
     border-color:black;
     border-width:5px;
-    height:200px;
-    width:200px;
+    width:18%;
+    height:width;
     background:gray;
 }
 
