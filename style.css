@@ -15,3 +15,20 @@ img{
 video{
     width:90%;
 }
+
+.pressed{
+    border-style: inset;
+}
+
+button.create{
+    border-style:solid;
+    border-color:black;
+    border-width:5px;
+    height:200px;
+    width:200px;
+    background:gray;
+}
+
+button.bar{
+
+}

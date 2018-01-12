@@ -12,6 +12,9 @@
 
       var time_since_last_touch = -1;
 
+      var eraser_state = false;
+
+
       function init(){
 	  document.getElementById("editor").style.display = "none";
 	  document.getElementById("editor_buttons").style.display = "none";
@@ -99,8 +102,7 @@
       function test_double_click(event){
 	  var d = new Date;
 	  var millis = d.getTime();
-	  document.getElementById('debug').innerHTML += "</br>"+millis;
-	  if(millis-time_since_last_touch<1000){
+	  if(millis-time_since_last_touch<500){
 	      event.preventDefault();
 	      open_canvas(event);
 	  }
@@ -194,6 +196,18 @@
 	  ctx.lineWidth = lw;
       }
 
+      function eraser(){
+	  var btn = document.getElementById("eraser_btn");
+	  if(!eraser_state){
+	      btn.setAttribute("class","pressed");
+	      eraser_state = true;
+	  }
+	  else{
+	      btn.setAttribute("class", "bar");
+	      eraser_state = false;
+	  }
+      }
+
     </script>
 </head>
 <body onload="init()">
@@ -219,8 +233,8 @@
 	<canvas id="ed_canvas"></canvas>
 	<script>
 	  var c = document.getElementById("ed_canvas");
-	  c.width = window.innerWidth;
-	  c.height = window.innerHeight;
+	  c.width = window.innerWidth*0.95;
+	  c.height = window.innerHeight*0.8;
 
 	  c.addEventListener("mousedown", start_path);
 	  c.addEventListener("mousemove", draw_to_new_point);
@@ -235,25 +249,23 @@
       </div>
       <footer>
 	<div id="content_buttons">
-	  <button type="button" onclick="add('canvas')">Canvas note </button>
-	  <button type="button" onclick="add('picture')">Picture node</button>
-	  <button type="button" onclick="add('video')">Video note</button>
-	  <button type="button" onclick="add('text')">Text note</button>
+	  <button type="button" class="create" onclick="add('canvas')"><span width="100%" height="100%"><img src="./icon/canvas.png" width="100%"/></span> </button>
+	  <button type="button" class="create" onclick="add('picture')"><span width="100%" height="100%"><img src="./icon/picture.png" width="100%"/></span></button>
+	  <button type="button" class="create" onclick="add('video')"><span width="100%" height="100%"><img src="./icon/video.png" width="100%"/></span></button>
+	  <button type="button" class="create" onclick="add('text')"><img src="./icon/text.png" width="100%"/></button>
+	  <button type="button" class="create" onclick="download_data()"><img src="./icon/save.png" width="100%"/></button>
 	</div>
 	<div id="editor_buttons">
 	  <label>Color:</label>
 	  <input type="color" id="color_picker" onchange="select_color()">
 	  <label>Linewidth:</label>
 	  <input type="range" min="1" max="30" value="5" id="linewidth_slider" onchange="select_linewidth()">
-	  <button id="eraser_btn" type="button">Eraser</button>
+	  <button id="eraser_btn" type="button" onclick="eraser()">Eraser</button>
 	  <button onclick="close_canvas()" type="button">Save & back</button>
 	</div>
     </footer>
     </article>
   </section>
-  <footer>
-    <button type="button" onclick="download_data()">Download note</button>
-  </footer>
 </body>
 
 </html>
