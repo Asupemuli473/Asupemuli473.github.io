@@ -199,13 +199,16 @@
 
       function eraser(){
 	  var btn = document.getElementById("eraser_btn");
+	  var ctx = document.getElementById("ed_canvas").getContext('2d');
 	  if(!eraser_state){
 	      btn.setAttribute("class","pressed");
 	      eraser_state = true;
+	      ctx.strokeStyle = "#FFFFFF";
 	  }
 	  else{
 	      btn.setAttribute("class", "tools");
 	      eraser_state = false;
+	      ctx.strokeStyle = "#000000";
 	  }
       }
 
