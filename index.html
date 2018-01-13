@@ -33,6 +33,7 @@
 	  case 'picture':
 	      elem = document.createElement("input");
 	      elem.setAttribute("id", "picture_".concat(num_picture++));
+	      elem.setAttribute("class", "note");
 	      elem.setAttribute("type", "file");
 	      elem.setAttribute("accept", "image/*");
 	      elem.setAttribute("capture", "camera");
@@ -203,7 +204,7 @@
 	      eraser_state = true;
 	  }
 	  else{
-	      btn.setAttribute("class", "bar");
+	      btn.setAttribute("class", "tools");
 	      eraser_state = false;
 	  }
       }
@@ -249,19 +250,19 @@
       </div>
       <footer>
 	<div id="content_buttons">
-	  <button type="button" class="create" onclick="add('canvas')"><span width="100%" height="100%"><img src="./icon/canvas.png" width="100%"/></span> </button>
-	  <button type="button" class="create" onclick="add('picture')"><span width="100%" height="100%"><img src="./icon/picture.png" width="100%"/></span></button>
-	  <button type="button" class="create" onclick="add('video')"><span width="100%" height="100%"><img src="./icon/video.png" width="100%"/></span></button>
-	  <button type="button" class="create" onclick="add('text')"><img src="./icon/text.png" width="100%"/></button>
-	  <button type="button" class="create" onclick="download_data()"><img src="./icon/save.png" width="100%"/></button>
+	  <button type="button" class="create" onclick="add('canvas')"><img class="icon" src="./icon/canvas.png"/> </button>
+	  <button type="button" class="create" onclick="add('picture')"><img class="icon" src="./icon/picture.png" /></button>
+	  <button type="button" class="create" onclick="add('video')"><img class="icon" src="./icon/video.png" /></button>
+	  <button type="button" class="create" onclick="add('text')"><img class="icon" src="./icon/text.png" /></button>
+	  <button type="button" class="create" onclick="download_data()"><img class="icon" src="./icon/save.png" /></button>
 	</div>
 	<div id="editor_buttons">
 	  <label>Color:</label>
-	  <input type="color" id="color_picker" onchange="select_color()">
+	  <input type="color" class="tools" id="color_picker" onchange="select_color()">
 	  <label>Linewidth:</label>
 	  <input type="range" min="1" max="30" value="5" id="linewidth_slider" onchange="select_linewidth()">
-	  <button id="eraser_btn" type="button" onclick="eraser()">Eraser</button>
-	  <button onclick="close_canvas()" type="button">Save & back</button>
+	  <button class="tools" id="eraser_btn" type="button" onclick="eraser()"><img class="icon" src="./icon/eraser.png"/></button>
+	  <button class="tools" onclick="close_canvas()" type="button"><img class="icon" src="./icon/back.png"/></button>
 	</div>
     </footer>
     </article>

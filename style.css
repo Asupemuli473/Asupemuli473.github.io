@@ -8,7 +8,7 @@ canvas{
     border-width:5;
 }
 
-img{
+img.note{
     width:90%;
 }
 
@@ -17,7 +17,12 @@ video{
 }
 
 .pressed{
-    border-style: inset;
+    border-style:inset;
+    border-color:black;
+    border-width:5px;
+    width:70px;
+    height:70px;
+    background:gray;
 }
 
 button.create{
@@ -27,8 +32,19 @@ button.create{
     width:18%;
     height:width;
     background:gray;
+    max-width:200px;
+    max-height:200px;
 }
 
-button.bar{
+button.tools{
+    border-style:solid;
+    border-color:black;
+    border-width:5px;
+    width:70px;
+    height:70px;
+    background:gray;
+}
 
+img.icon{
+    width:100%;
 }
