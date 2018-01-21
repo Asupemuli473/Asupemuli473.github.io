@@ -18,7 +18,6 @@ function init(){
 	document.getElementById("label_l").style.display="none";
 	document.getElementById("label_c").style.display="none";
 	document.getElementById("color_picker").style.display="none";
-	document.getElementById("color_list").addEventListener("onchange", color_picked_list);
     }
     else{
 	document.getElementById("color_list").style.display = "none";
@@ -217,6 +216,7 @@ function eraser(){
     }
 }
 
-function color_picked_list(event){
-    drawing_ctx.strokeStyle = event.target.options[event.target.selectedIndex].value;
+function color_picked_list(){
+    var e = document.getElementById("color_list");
+    drawing_ctx.strokeStyle = e.options[e.selectedIndex].value;
 }
