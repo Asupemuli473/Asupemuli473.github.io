@@ -237,5 +237,5 @@ function color_picked_list(){
 	c="00FF00";
 	break;
     }
-    cur_drawing_ctx.strokeStyle = c;
+    document.getElementById("ed_canvas").getContext('2d').strokeStyle = c;
 }
