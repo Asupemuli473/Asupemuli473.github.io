@@ -219,7 +219,6 @@ function eraser(){
 function color_picked_list(){
     var e = document.getElementById("color_list");
     var c = e.value;
-    document.getElementsByTagName("h1")[0].innerHTML = e.value;
     switch(c){
     case "black":
 	c="#000000";
