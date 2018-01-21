@@ -51,3 +51,7 @@ button.tools{
 img.icon{
     width:100%;
 }
+
+#editor_buttons{
+    padding-top:10px;
+}
