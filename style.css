@@ -32,8 +32,8 @@ button.create{
     width:18%;
     height:width;
     background:gray;
-    max-width:200px;
-    max-height:200px;
+    max-width:150px;
+    max-height:150px;
 }
 
 button.tools{
