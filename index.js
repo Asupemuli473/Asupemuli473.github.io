@@ -218,5 +218,23 @@ function eraser(){
 
 function color_picked_list(){
     var e = document.getElementById("color_list");
-    drawing_ctx.strokeStyle = e.options[e.selectedIndex].value;
+    var c = e.options[e.selectedIndex].value;
+    switch(c){
+    case "black":
+	c="#000000";
+	break;
+    case "red":
+	c="#FF0000";
+	break;
+    case "blue":
+	c="#0000FF";
+	break;
+    case "yellow":
+	c="FFFF00";
+	break;
+    case "green":
+	c="00FF00";
+	break;
+    }
+    drawing_ctx.strokeStyle = 
 }
