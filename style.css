@@ -46,12 +46,13 @@ button.tools{
     width:70px;
     height:70px;
     background:gray;
+    margin-top:15px;
 }
 
 img.icon{
     width:100%;
 }
 
-#editor_buttons{
-    padding-top:25px;
+footer{
+    text-align:center;
 }
