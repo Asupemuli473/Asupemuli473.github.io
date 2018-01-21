@@ -217,7 +217,6 @@ function eraser(){
 }
 
 function color_picked_list(){
-    document.getElementsByTagName("h1")[0].innerHTML = "changed";
     var e = document.getElementById("color_list");
     var c = e.value;
     switch(c){
@@ -237,5 +236,5 @@ function color_picked_list(){
 	c="00FF00";
 	break;
     }
-    drawing_ctx.strokeStyle = c;
+    cur_drawing_ctx.strokeStyle = c;
 }
