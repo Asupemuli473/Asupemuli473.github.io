@@ -217,6 +217,7 @@ function eraser(){
 }
 
 function color_picked_list(){
+    document.getElementByTagName("h1")[0].innerHTML = "changed";
     var e = document.getElementById("color_list");
     var c = e.options[e.selectedIndex].value;
     switch(c){
