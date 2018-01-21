@@ -236,5 +236,5 @@ function color_picked_list(){
 	c="00FF00";
 	break;
     }
-    drawing_ctx.strokeStyle = 
+    drawing_ctx.strokeStyle = c;
 }
