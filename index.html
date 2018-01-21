@@ -53,9 +53,16 @@
 	  <button type="button" class="create" onclick="download_data()"><img class="icon" src="./icon/save.png" /></button>
 	</div>
 	<div id="editor_buttons">
-	  <label>Color:</label>
+	  <label id="label_c">Color:</label>
 	  <input type="color" class="tools" id="color_picker" onchange="select_color()">
-	  <label>Linewidth:</label>
+	  <select id="color_list" name="color" size="5">
+	    <option>black</option>
+	    <option>blue</option>
+	    <option>yellow</option>
+	    <option>red</option>
+	    <option>green</option>
+	  </select>
+	  <label id="label_l">Linewidth:</label>
 	  <input type="range" min="1" max="30" value="5" id="linewidth_slider" onchange="select_linewidth()">
 	  <button class="tools" id="eraser_btn" type="button" onclick="eraser()"><img class="icon" src="./icon/eraser.png"/></button>
 	  <button class="tools" onclick="close_canvas()" type="button"><img class="icon" src="./icon/back.png"/></button>
