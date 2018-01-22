@@ -44,25 +44,34 @@ function init(){
 }
 
 function redraw_canvas(event){
-    var debug = document.getElementById("debug");
-    var c = document.getElementById("ed_canvas");
-    var image = new Image();
-    image.src = c.toDataURL();
-
-    c.width = window.innerWidth*0.95;
-    c.height = window.innerHeight*0.7;
-    c.style.width = c.width;
-    c.style.height = c.height;
-    
+    // if currently drawing resize content
     if(document.getElementById("editor").style.display=="inline"){
-	var ratio = image.clientWidth/image.clientHeight;
-	if(image.clientWidth>c.width){
-	    c.getContext('2d').drawImage(image,0,0, c.width, c.width/ratio);
+	var image = new Image();
+	image.src = c.toDataURL();
+	var c = document.getElementById("ed_canvas");
+	c.width = window.innerWidth*0.95;
+	c.height = window.innerHeight*0.7;
+	c.style.width = c.width;
+	c.style.height = c.height;
+	image.onload = function(){
+	    var ratio = image.width/image.height;
+	    var ctx = document.getElementById("ed_canvas").getContext('2d');
+	    if(image.width>c.width){
+		ctx.drawImage(image,0,0, c.width, c.width/ratio);
+	    }
+	    else{
+		ctx.drawImage(image,0,0, c.height*ratio, c.height);
+	    }
+	    
+	    
 	}
-	else{
-	    c.getContext('2d').drawImage(image,0,0, c.height*ratio, c.height);
-	}
-
+    }
+    else{
+	var c = document.getElementById("ed_canvas");
+	c.width = window.innerWidth*0.95;
+	c.height = window.innerHeight*0.7;
+	c.style.width = c.width;
+	c.style.height = c.height;
     }
 }
 
