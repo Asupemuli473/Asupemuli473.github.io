@@ -45,33 +45,11 @@ function init(){
 
 function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
-    if(document.getElementById("editor").style.display=="none"){
-	c.width = window.innerWidth*0.95;
-	c.height = window.innerHeight*0.7;
-	c.style.width = c.width;
-	c.style.height = c.height;
-    }
-    else{
-	var new_canvas = document.createElement("canvas");
-	new_canvas.width = window.innerWidth*0.95;
-	new_canvas.height = window.innerHeight*0.7;
-	new_canvas.style.width = new_canvas.width;
-	new_canvas.style.height = new_canvas.height;
-
-	var scale_factor;
-	if(new_canvas.width>c.width){
-	    scale_factor = new_canvas.height/c.height;
-	}
-	else{
-	    scale_factor = new_canvas.width/c.width;
-	}
-	c.getContext('2d').scale(scale_factor,scale_factor);
-	new_canvas.getContext('2d').drawImage(c,0,0);
-	c.parentNode.removeChild(c);
-	new_canvas.id = "ed_canvas";
-	document.getElementById("editor").appendChild(new_canvas);
-	
-    }
+    
+    c.width = window.innerWidth*0.95;
+    c.height = window.innerHeight*0.7;
+    c.style.width = c.width;
+    c.style.height = c.height;
 }
 
 function add(type){
