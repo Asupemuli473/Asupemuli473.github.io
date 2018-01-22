@@ -54,15 +54,13 @@ function redraw_canvas(event){
 	var image = new Image();
 	image.src = c.toDataURL();
 	var ratio = image.width/image.height;
-	// if(image.width>c.width){
-	//     image.style.width = c.width;
-	//     image.style.height = c.width/ratio;
-	// }
-	// else{
-	//     image.style.height = c.height;
-	//     image.style.width = c.height*ratio;
-	// }
-	c.getContext('2d').drawImage(image,0,0);
+	if(image.width>c.width){
+	    c.getContext('2d').drawImage(image,0,0, c.width, c.width/ratio);
+	}
+	else{
+	    c.getContext('2d').drawImage(image,0,0, c.height*ratio, c.height);
+	}
+
     }
     
     
