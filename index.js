@@ -52,6 +52,7 @@ function redraw_canvas(event){
     var img_h;
     var ratio;
     // if currently drawing save image of content and properties
+    debug.innerHTML = document.getElementById("editor").style.display;
     if(document.getElementById("editor").style.display=="inline"){
 	debug.innerHTML = debug.innerHTML + "1"; 
 	image  = new Image();
