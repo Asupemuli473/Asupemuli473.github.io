@@ -44,6 +44,7 @@ function init(){
 }
 
 function redraw_canvas(event){
+    var debug = document.getElementById("debug");
     var image = 0;
     var c = document.getElementById("ed_canvas");
     var ctx = c.getContext('2d');
@@ -52,11 +53,17 @@ function redraw_canvas(event){
     var ratio;
     // if currently drawing save image of content and properties
     if(document.getElementById("editor").style.display=="inline"){
+	debug.innerHTML = debug.innerHTML + "1"; 
 	image  = new Image();
+	debug.innerHTML = debug.innerHTML + "2";
 	image.src = c.toDataURL();
+	debug.innerHTML = debug.innerHTML + "3";
 	img_w = c.width;
+	debug.innerHTML = debug.innerHTML + "4";
 	img_h = c.height;
+	debug.innerHTML = debug.innerHTML + "5";
 	ratio = img_w/imh_h;
+	debug.innerHTML = debug.innerHTML + "6";
     }
     //resize canvas
     c.width = window.innerWidth*0.95;
