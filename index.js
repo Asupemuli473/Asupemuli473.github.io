@@ -50,7 +50,7 @@ function redraw_canvas(event){
     document.getElementsByTagName("h1")[0].innerHTML = document.getElementById("editor").style.display;
     
     if(document.getElementById("editor").style.display=="inline"){
-	documents.getElementsByTagName("h1")[0].innerHTML = "image detected";
+	document.getElementsByTagName("h1")[0].innerHTML = "image detected";
 	var image = new Image();
 	image.src = c.toDataURL();
 	var ratio = image.width/image.height;
