@@ -42,9 +42,9 @@ function init(){
 }
 
 function redraw_canvas(event){
+    var c = document.getElementById("ed_canvas");
     var image = new Image();
     image.src = c.toDataURL();
-    var c = document.getElementById("ed_canvas");
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
@@ -62,9 +62,6 @@ function redraw_canvas(event){
 	}
 
     }
-    
-    
-
 }
 
 function add(type){
