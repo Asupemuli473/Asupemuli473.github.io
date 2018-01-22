@@ -44,46 +44,34 @@ function init(){
 }
 
 function redraw_canvas(event){
-    var debug = document.getElementById("debug");
-    var image = 0;
     var c = document.getElementById("ed_canvas");
-    var ctx = c.getContext('2d');
-    var img_w;
-    var img_h;
-    var ratio;
-    // if currently drawing save image of content and properties
-    if(document.getElementById("editor").style.display=="inline"){
-	image  = ctx.getImageData(0,0,c.width,c.height);
-	img_w = c.width;
-	img_h = c.height;
-	ratio = img_w/imh_h;
+    if(document.getElementById("editor").style.display=="none"){
+	c.width = window.innerWidth*0.95;
+	c.height = window.innerHeight*0.7;
+	c.style.width = c.width;
+	c.style.height = c.height;
     }
-    //resize canvas
-    // c.width = window.innerWidth*0.95;
-    // c.height = window.innerHeight*0.7;
-    // c.style.width = c.width;
-    // c.style.height = c.height;
+    else{
+	var new_canvas = document.createElement("canvas");
+	new_canvas.width = window.innerWidth*0.95;
+	new_canvas.height = window.innerHeight*0.7;
+	new_canvas.style.width = new_canvas.width;
+	new_canvas.style.height = new_canvas.height;
 
-    ctx.scale(window.innerWidth*95/c.width, window.innerHeight*0.7/c.height);
-
-    var scaled_width;
-    var scaled_height;
-    
-    if(image){
-    	if(img_w>c.width){
-    	    scaled_width = c.width;
-	    scaled_height = scaled_width/ratio;
-    	}
-    	else{
-	    scaled_height = c.height;
-	    scaled_width = scaled_height*ratio;
-    	}
+	var scale_factor;
+	if(new_canvas.width>c.width){
+	    scale_factor = new_canvas.height/c.height;
+	}
+	else{
+	    scale_factor = new_canvas.width/c.width;
+	}
+	c.getContext('2d').scale(scale_factor,scale_factor);
+	new_canvas.getContext('2d').drawImage(c,0,0);
+	c.parentNode.removeChild(elem);
+	new_canvas.id = "ed_canvas";
+	document.getElementById("editor").appendChild(new_canvas);
+	
     }
-
-    ctx.putImageData(image,0,0,0,0,scaled_width,scaled_height);
-
-    
-
 }
 
 function add(type){
