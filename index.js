@@ -42,6 +42,8 @@ function init(){
 }
 
 function redraw_canvas(event){
+    var image = new Image();
+    image.src = c.toDataURL();
     var c = document.getElementById("ed_canvas");
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
@@ -51,8 +53,6 @@ function redraw_canvas(event){
     
     if(document.getElementById("editor").style.display=="inline"){
 	document.getElementsByTagName("h1")[0].innerHTML = "image detected";
-	var image = new Image();
-	image.src = c.toDataURL();
 	var ratio = image.width/image.height;
 	if(image.width>c.width){
 	    c.getContext('2d').drawImage(image,0,0, c.width, c.width/ratio);
@@ -190,10 +190,6 @@ function close_canvas(){
     document.getElementById("editor_buttons").style.display = "none";
 
     c.getContext('2d').clearRect(0, 0, c.width, c.height);
-}
-
-function download_data(event){
-
 }
 
 var cur_drawing_ctx = -1;
