@@ -54,8 +54,8 @@ function redraw_canvas(event){
 	image.src = c.toDataURL();
 	var ratio = image.width/image.height;
 	if(image.width>c.width){
-	    image.stlye.width = c.width;
-	    image.stlye.height = c.width/ratio;
+	    image.style.width = c.width;
+	    image.style.height = c.width/ratio;
 	}
 	else{
 	    image.style.height = c.height;
