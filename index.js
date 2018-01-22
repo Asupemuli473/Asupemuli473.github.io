@@ -11,6 +11,22 @@ var eraser_state = false;
 
 
 function init(){
+    var c = document.getElementById("ed_canvas");
+    c.width = window.innerWidth*0.95;
+    c.height = window.innerHeight*0.7;
+    c.style.width = c.width;
+    c.style.height = c.height;
+    
+    c.addEventListener("mousedown", start_path);
+    c.addEventListener("mousemove", draw_to_new_point);
+    c.addEventListener("mouseup", end_path);
+    
+    c.addEventListener("touchstart", start_path);
+    c.addEventListener("touchmove", draw_to_new_point);
+    c.addEventListener("touchend", end_path);
+    
+    c.getContext('2d').lineWidth = 5;
+    
     document.getElementById("editor").style.display = "none";
     document.getElementById("editor_buttons").style.display = "none";
 
@@ -26,7 +42,29 @@ function init(){
 }
 
 function redraw_canvas(event){
-    document.getElementsByTagName("h1")[0].innerHTML = "changed";
+    var c = document.getElementById("ed_canvas");
+    c.width = window.innerWidth*0.95;
+    c.height = window.innerHeight*0.7;
+    c.style.width = c.width;
+    c.style.height = c.height;
+    
+    if(c.style.display!="none"){
+	var image = new Image();
+	image.src = c.toDataURL();
+	var ratio = image.width/image.height;
+	if(image.width>c.width){
+	    image.stlye.width = c.width;
+	    image.stlye.height = c.width/ratio;
+	}
+	else{
+	    image.style.height = c.height;
+	    image.style.width = c.height*ratio;
+	}
+	c.getContext('2d').drawImage(image,0,0);
+    }
+    
+    
+
 }
 
 function add(type){
@@ -112,7 +150,7 @@ function insertAfter(el, referenceNode){
 function test_double_click(event){
     var d = new Date;
     var millis = d.getTime();
-    if(millis-time_since_last_touch<500){
+    if(millis-time_since_last_touch<350){
 	event.preventDefault();
 	open_canvas(event);
     }
