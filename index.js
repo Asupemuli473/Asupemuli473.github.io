@@ -67,7 +67,7 @@ function redraw_canvas(event){
 	}
 	c.getContext('2d').scale(scale_factor,scale_factor);
 	new_canvas.getContext('2d').drawImage(c,0,0);
-	c.parentNode.removeChild(elem);
+	c.parentNode.removeChild(c);
 	new_canvas.id = "ed_canvas";
 	document.getElementById("editor").appendChild(new_canvas);
 	
