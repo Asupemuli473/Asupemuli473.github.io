@@ -45,14 +45,13 @@ function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
     var image = new Image();
     image.src = c.toDataURL();
+    document.getElementById("debug_img").src = image.src;
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
     c.style.height = c.height;
-    document.getElementsByTagName("h1")[0].innerHTML = document.getElementById("editor").style.display;
     
     if(document.getElementById("editor").style.display=="inline"){
-	document.getElementsByTagName("h1")[0].innerHTML = "image detected";
 	var ratio = image.width/image.height;
 	if(image.width>c.width){
 	    c.getContext('2d').drawImage(image,0,0, c.width, c.width/ratio);
