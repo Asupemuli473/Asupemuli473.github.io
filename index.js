@@ -276,4 +276,5 @@ function color_picked_list(){
 	break;
     }
     document.getElementById("ed_canvas").getContext('2d').strokeStyle = c;
+    document.getElementById("eraser_btn").class = "tools";
 }
