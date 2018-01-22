@@ -48,7 +48,7 @@ function redraw_canvas(event){
     c.style.width = c.width;
     c.style.height = c.height;
     
-    if(c.style.display!="none"){
+    if(document.getElementById("editor").style.display!="none"){
 	documents.getElementsByTagName("h1")[0].innerHTML = "image detected";
 	var image = new Image();
 	image.src = c.toDataURL();
