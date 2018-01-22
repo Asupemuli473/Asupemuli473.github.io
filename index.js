@@ -57,6 +57,7 @@ function redraw_canvas(event){
 	image.onload(function(){
 
 	});
+	//
 	image.src = c.toDataURL();
 	img_w = c.width;
 	img_h = c.height;
