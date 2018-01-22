@@ -48,7 +48,7 @@ function redraw_canvas(event){
     var temp_canvas = document.createElement('canvas');
     temp_canvas.width = c.width;
     temp_canvas.height = c.height;
-    temp_canvas.getContext('2d').drawImage(c,0,0);
+
     
     // var ratio = c.width/c.height;
     // var width;
@@ -68,6 +68,7 @@ function redraw_canvas(event){
     
 
     temp_canvas.getContext('2d').scale(scale,scale);
+    temp_canvas.getContext('2d').drawImage(c,0,0);
     // temp_canvas.width = temp_canvas.width*scale;
     // temp_canvas.height = temp_canvas.height*scale;
     
