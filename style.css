@@ -1,5 +1,5 @@
 textarea{
-    width:100%;
+    width:90vw;
     height:30vh;
 }
 
@@ -10,11 +10,11 @@ canvas{
 }
 
 img.note{
-    max-width:100%;
+    width:90vw;
 }
 
 video{
-    max-width:100%;
+    width:90vw;
 }
 
 .pressed{
@@ -55,8 +55,4 @@ img.icon{
 
 footer{
     text-align:center;
-}
-
-#notes{
-    width: 90vw;
 }
