@@ -24,6 +24,8 @@ function init(){
     c.addEventListener("touchstart", start_path);
     c.addEventListener("touchmove", draw_to_new_point);
     c.addEventListener("touchend", end_path);
+
+
     
     c.getContext('2d').lineWidth = 5;
     
@@ -42,10 +44,11 @@ function init(){
 }
 
 function redraw_canvas(event){
+    var debug = document.getElementById("debug");
     var c = document.getElementById("ed_canvas");
     var image = new Image();
     image.src = c.toDataURL();
-    document.getElementById("debug_img").src = image.src;
+    debug.innerHTML += "image width: "+image.width+", image height: "+image.height;
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
@@ -53,6 +56,7 @@ function redraw_canvas(event){
     
     if(document.getElementById("editor").style.display=="inline"){
 	var ratio = image.width/image.height;
+	debug.innerHTML+=", ratio: "+ratio;
 	if(image.width>c.width){
 	    c.getContext('2d').drawImage(image,0,0, c.width, c.width/ratio);
 	}
