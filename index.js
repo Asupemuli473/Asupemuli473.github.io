@@ -49,19 +49,19 @@ function redraw_canvas(event){
     c.style.height = c.height;
     document.getElementsByTagName("h1")[0].innerHTML = document.getElementById("editor").style.display;
     
-    if(document.getElementById("editor").style.display==="inline"){
+    if(document.getElementById("editor").style.display=="inline"){
 	document.getElementsByTagName("h1")[0].innerHTML = "image detected";
 	var image = new Image();
 	image.src = c.toDataURL();
 	var ratio = image.width/image.height;
-	if(image.width>c.width){
-	    image.style.width = c.width;
-	    image.style.height = c.width/ratio;
-	}
-	else{
-	    image.style.height = c.height;
-	    image.style.width = c.height*ratio;
-	}
+	// if(image.width>c.width){
+	//     image.style.width = c.width;
+	//     image.style.height = c.width/ratio;
+	// }
+	// else{
+	//     image.style.height = c.height;
+	//     image.style.width = c.height*ratio;
+	// }
 	c.getContext('2d').drawImage(image,0,0);
     }
     
