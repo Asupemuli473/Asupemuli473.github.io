@@ -43,10 +43,10 @@ function init(){
     }
 }
 
+var temp_img = new Image();
 function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
-    var image = new Image(c.width, c.height);
-    image.src = c.toDataURL();
+    temp_img.src = c.toDataURL();
     document.getElementById("deb_img").src = c.toDataURL();
     var ratio = c.width/c.height;
     var width;
@@ -65,7 +65,7 @@ function redraw_canvas(event){
     c.style.width = c.width;
     c.style.height = c.height;
 
-    c.getContext('2d').drawImage(image,0,0,width,height);
+    c.getContext('2d').drawImage(temp_img,0,0,width,height);
     c.getContext('2d').lineWidth = document.getElementById("linewidth_slider").value;
     
 }
