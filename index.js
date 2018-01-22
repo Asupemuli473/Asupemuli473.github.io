@@ -45,11 +45,29 @@ function init(){
 
 function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
-    
+    var image = new Image(c.width, c.height);
+    image.src = c.toDataURL();
+
+    var ratio = c.width/c.height;
+    var width;
+    var height;
+
+    if(c.width>window.innerWidth*0.95){
+	width = window.innerWidth*0.95;
+	height = width*ratio;
+    }
+    else{
+	height = window.innerHeight*0.7;
+	width = height/ratio;
+    }
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
     c.style.height = c.height;
+
+    c.getContext('2d').drawImage(image,0,0,width,height);
+    c.getContext('2d').lineWidth = document.getElementById("linewidth_slider").value;
+    
 }
 
 function add(type){
