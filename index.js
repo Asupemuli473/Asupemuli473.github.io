@@ -59,10 +59,12 @@ function redraw_canvas(event){
 	ratio = img_w/imh_h;
     }
     //resize canvas
-    c.width = window.innerWidth*0.95;
-    c.height = window.innerHeight*0.7;
-    c.style.width = c.width;
-    c.style.height = c.height;
+    // c.width = window.innerWidth*0.95;
+    // c.height = window.innerHeight*0.7;
+    // c.style.width = c.width;
+    // c.style.height = c.height;
+
+    ctx.scale(window.innerWidth*95/c.width, window.innerHeight*0.7/c.height);
 
     var scaled_width;
     var scaled_height;
