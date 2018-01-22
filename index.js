@@ -49,27 +49,13 @@ function redraw_canvas(event){
     temp_canvas.width = c.width;
     temp_canvas.height = c.height;
 
+    var scale1;
+    var scale2;
+    scale1 = window.innerWidth*0.95/c.width;
+    scale2 = window.innerHeiht*0.7/c.height;
+    var scale = Math.max(scale1, scale2);
     
-    // var ratio = c.width/c.height;
-    // var width;
-    // var height;
-
-    var scale;
-    if(c.width>window.innerWidth*0.95){
-	// width = window.innerWidth*0.95;
-	// height = width*ratio;
-	scale = window.innerWidth*0.95/c.width;
-    }
-    else{
-	// height = window.innerHeight*0.7;
-	// width = height/ratio;
-	scale = window.innerHeiht*0.7/c.height;
-    }
-    
-
     temp_canvas.getContext('2d').drawImage(c,0,0,c.width*scale,c.height*scale);
-    // temp_canvas.width = temp_canvas.width*scale;
-    // temp_canvas.height = temp_canvas.height*scale;
     
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
