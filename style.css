@@ -1,6 +1,6 @@
 textarea{
-    width:90%;
-    height:30%;
+    width:90vw;
+    height:30vh;
 }
 
 canvas{
@@ -10,11 +10,11 @@ canvas{
 }
 
 img.note{
-    width:90%;
+    width:90vw;
 }
 
 video{
-    width:90%;
+    width:90vh;
 }
 
 .pressed{
