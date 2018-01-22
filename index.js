@@ -53,7 +53,7 @@ function redraw_canvas(event){
     var scale2;
     scale1 = window.innerWidth*0.95/c.width;
     scale2 = window.innerHeight*0.7/c.height;
-    var scale = Math.max(scale1, scale2);
+    var scale = Math.min(scale1, scale2);
     
     temp_canvas.getContext('2d').drawImage(c,0,0,c.width*scale,c.height*scale);
     
