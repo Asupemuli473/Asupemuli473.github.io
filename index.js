@@ -45,6 +45,7 @@ function init(){
 
 function redraw_canvas(event){
     var debug = document.getElementById("debug");
+    debug.innerHTML = "test";
     var image = 0;
     var c = document.getElementById("ed_canvas");
     var ctx = c.getContext('2d');
