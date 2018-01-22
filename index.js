@@ -47,7 +47,7 @@ function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
     var image = new Image(c.width, c.height);
     image.src = c.toDataURL();
-
+    document.getElementById("deb_img").src = c.toDataURL();
     var ratio = c.width/c.height;
     var width;
     var height;
