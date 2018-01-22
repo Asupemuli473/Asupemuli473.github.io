@@ -65,10 +65,14 @@ function redraw_canvas(event){
     c.style.width = c.width;
     c.style.height = c.height;
 
-    temp_img.width = width;
-    temp_img.height = height;
 
-    c.getContext('2d').drawImage(temp_img,0,0);
+    var canvas = document.createElement("canvas");
+    canvas.width = c.width;
+    canvas.height = c.height;
+    
+    
+    canvas.getContext('2d').drawImage(temp_img,0,0,width,height);
+    c.getContext('2d').drawImage(canvas,0,0);
     c.getContext('2d').lineWidth = document.getElementById("linewidth_slider").value;
     
 }
