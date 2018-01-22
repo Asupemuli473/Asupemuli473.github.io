@@ -48,7 +48,7 @@ function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
     var image = new Image();
     image.src = c.toDataURL();
-    debug.innerHTML = "image width: "+image.width+", image height: "+image.height;
+    debug.innerHTML =debug.innerHTML+ "image width: "+image.width+", image height: "+image.height;
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
