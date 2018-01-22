@@ -49,6 +49,7 @@ function redraw_canvas(event){
     c.style.height = c.height;
     
     if(c.style.display!="none"){
+	documents.getElementsByTagName("h1")[0].innerHTML = "image detected";
 	var image = new Image();
 	image.src = c.toDataURL();
 	var ratio = image.width/image.height;

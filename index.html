@@ -28,21 +28,6 @@
       </div>
       <div id="editor">
 	<canvas id="ed_canvas"></canvas>
-	<script>
-	  var c = document.getElementById("ed_canvas");
-	  c.width = window.innerWidth*0.95;
-	  c.height = window.innerHeight*0.7;
-
-	  c.addEventListener("mousedown", start_path);
-	  c.addEventListener("mousemove", draw_to_new_point);
-	  c.addEventListener("mouseup", end_path);
-	  
-	  c.addEventListener("touchstart", start_path);
-	  c.addEventListener("touchmove", draw_to_new_point);
-	  c.addEventListener("touchend", end_path);
-
-	  c.getContext('2d').lineWidth = 5;
-	</script>
       </div>
       <footer>
 	<div id="content_buttons">
