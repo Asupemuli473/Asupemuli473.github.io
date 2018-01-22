@@ -48,7 +48,8 @@ function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
     var image = new Image();
     image.src = c.toDataURL();
-    debug.innerHTML = "image width: "+image.clientWidth+", image height: "+image.clientHeight;
+    debug.innerHTML = image;
+    //debug.innerHTML = "image width: "+image.clientWidth+", image height: "+image.clientHeight;
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
@@ -56,7 +57,7 @@ function redraw_canvas(event){
     
     if(document.getElementById("editor").style.display=="inline"){
 	var ratio = image.clientWidth/image.clientHeight;
-	debug.innerHTML=debug.innerHTML+", ratio: "+ratio;
+//	debug.innerHTML=debug.innerHTML+", ratio: "+ratio;
 	if(image.clientWidth>c.width){
 	    c.getContext('2d').drawImage(image,0,0, c.width, c.width/ratio);
 	}
