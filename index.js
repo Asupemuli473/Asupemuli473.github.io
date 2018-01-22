@@ -58,7 +58,7 @@ function redraw_canvas(event){
 	img_w = c.width;
 	img_h = c.height;
 	ratio = img_w/imh_h;
-	debug.innerHTML = img_w+"-"+img_h+"-"+ration;
+	debug.innerHTML = img_w+"-"+img_h+"-"+ratio;
     }
     //resize canvas
     c.width = window.innerWidth*0.95;
