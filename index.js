@@ -67,7 +67,7 @@ function redraw_canvas(event){
     }
     
 
-    // temp_canvas.getContext('2d').scale(scale,scale);
+    temp_canvas.getContext('2d').scale(scale,scale);
     // temp_canvas.width = temp_canvas.width*scale;
     // temp_canvas.height = temp_canvas.height*scale;
     
