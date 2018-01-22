@@ -43,36 +43,40 @@ function init(){
     }
 }
 
-var temp_img = new Image();
 function redraw_canvas(event){
     var c = document.getElementById("ed_canvas");
-    temp_img.src = c.toDataURL();
-    document.getElementById("deb_img").src = c.toDataURL();
-    var ratio = c.width/c.height;
-    var width;
-    var height;
+    var temp_canvas = document.createElement('canvas');
+    temp_canvas.width = c.width;
+    temp_canvas.height = c.height;
+    temp_canvas.getContext('2d').drawImage(c,0,0);
+    
+    // var ratio = c.width/c.height;
+    // var width;
+    // var height;
 
+    var scale;
     if(c.width>window.innerWidth*0.95){
-	width = window.innerWidth*0.95;
-	height = width*ratio;
+	// width = window.innerWidth*0.95;
+	// height = width*ratio;
+	scale = window.innerWidth*0.95/c.width;
     }
     else{
-	height = window.innerHeight*0.7;
-	width = height/ratio;
+	// height = window.innerHeight*0.7;
+	// width = height/ratio;
+	scale = window.innerHeiht*0.7/c.height;
     }
+    
+
+    temp_canvas.getContext('2d').scale(scale,scale);
+    temp_canvas.width = temp_canvas.width*scale;
+    temp_canvas.height = temp_canvas.height*scale;
+    
     c.width = window.innerWidth*0.95;
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
     c.style.height = c.height;
 
-
-    var canvas = document.createElement("canvas");
-    canvas.width = c.width;
-    canvas.height = c.height;
-    
-    
-    canvas.getContext('2d').drawImage(temp_img,0,0,width,height);
-    c.getContext('2d').drawImage(canvas,0,0);
+    c.getContext('2d').drawImage(temp_canvas,0,0);
     c.getContext('2d').lineWidth = document.getElementById("linewidth_slider").value;
     
 }
