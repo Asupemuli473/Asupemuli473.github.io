@@ -70,14 +70,14 @@ function redraw_canvas(event){
     c.style.width = c.width;
     c.style.height = c.height;
 
-    if(image){
-	if(img_w>c.width){
-	    ctx.drawImage(image,0,0, c.width, c.width/ratio);
-	}
-	else{
-	    ctx.drawImage(image,0,0, c.height*ratio, c.height);
-	}
-    }
+    // if(image){
+    // 	if(img_w>c.width){
+    // 	    ctx.drawImage(image,0,0, c.width, c.width/ratio);
+    // 	}
+    // 	else{
+    // 	    ctx.drawImage(image,0,0, c.height*ratio, c.height);
+    // 	}
+    // }
 
 }
 
