@@ -47,6 +47,7 @@ function redraw_canvas(event){
     c.height = window.innerHeight*0.7;
     c.style.width = c.width;
     c.style.height = c.height;
+    document.getElementsByTagName("h1")[0].innerHTML = document.getElementById("editor").style.display;
     
     if(document.getElementById("editor").style.display=="inline"){
 	documents.getElementsByTagName("h1")[0].innerHTML = "image detected";
