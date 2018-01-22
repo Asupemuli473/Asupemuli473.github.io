@@ -54,10 +54,6 @@ function redraw_canvas(event){
     // if currently drawing save image of content and properties
     if(document.getElementById("editor").style.display=="inline"){
 	image  = new Image();
-	image.onload(function(){
-
-	});
-	//
 	image.src = c.toDataURL();
 	img_w = c.width;
 	img_h = c.height;
