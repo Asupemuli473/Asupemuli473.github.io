@@ -18,10 +18,15 @@ function init(){
 	document.getElementById("label_l").style.display="none";
 	document.getElementById("label_c").style.display="none";
 	document.getElementById("color_picker").style.display="none";
+	window.addEventListener("orientationchange", redraw_canvas);
     }
     else{
 	document.getElementById("color_list").style.display = "none";
     }
+}
+
+function redraw_canvas(event){
+    document.getElementsByTagName("h1")[0].innerHTML = "changed";
 }
 
 function add(type){
