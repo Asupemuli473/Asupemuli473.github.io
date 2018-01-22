@@ -53,12 +53,10 @@ function redraw_canvas(event){
     var ratio;
     // if currently drawing save image of content and properties
     if(document.getElementById("editor").style.display=="inline"){
-	image  = new Image();
-	image.src = c.toDataURL();
+	image  = ctx.getImageData(0,0,c.width,c.height);
 	img_w = c.width;
 	img_h = c.height;
 	ratio = img_w/imh_h;
-	debug.innerHTML = img_w+"-"+img_h+"-"+ratio;
     }
     //resize canvas
     c.width = window.innerWidth*0.95;
@@ -66,14 +64,23 @@ function redraw_canvas(event){
     c.style.width = c.width;
     c.style.height = c.height;
 
-    // if(image){
-    // 	if(img_w>c.width){
-    // 	    ctx.drawImage(image,0,0, c.width, c.width/ratio);
-    // 	}
-    // 	else{
-    // 	    ctx.drawImage(image,0,0, c.height*ratio, c.height);
-    // 	}
-    // }
+    var scaled_width;
+    var scaled_height;
+    
+    if(image){
+    	if(img_w>c.width){
+    	    scaled_width = c.width;
+	    scaled_height = scaled_width/ratio;
+    	}
+    	else{
+	    scaled_height = c.height;
+	    scaled_width = scaled_height*ratio;
+    	}
+    }
+
+    ctx.putImageData(image,0,0,0,0,scaled_width,scaled_height);
+
+    
 
 }
 
