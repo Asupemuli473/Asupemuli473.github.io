@@ -232,6 +232,7 @@ function select_color(){
     var ctx = document.getElementById("ed_canvas").getContext('2d');
     var color = document.getElementById("color_picker").value;
     ctx.strokeStyle = color;
+    document.getElementById("eraser_btn").setAttribute("class", "tools");
 }
 
 function select_linewidth(){
@@ -240,18 +241,20 @@ function select_linewidth(){
     ctx.lineWidth = lw;
 }
 
+var saved_color;
 function eraser(){
     var btn = document.getElementById("eraser_btn");
     var ctx = document.getElementById("ed_canvas").getContext('2d');
     if(!eraser_state){
 	btn.setAttribute("class","pressed");
 	eraser_state = true;
+	saved_color = ctx.strokeStyle;
 	ctx.strokeStyle = "#FFFFFF";
     }
     else{
 	btn.setAttribute("class", "tools");
 	eraser_state = false;
-	ctx.strokeStyle = "#000000";
+	ctx.strokeStyle = saved_color;
     }
 }
 
